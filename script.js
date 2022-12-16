@@ -60,3 +60,11 @@ function jeu(dataCell, cellDiv) {
         testWin(figure)
     }
 }
+
+// Fonction pose de la Figure sur la case voulue
+function joueur(dataCell) {
+    let l = Math.floor(dataCell / 3)
+    let pos = dataCell % 3
+    board[l].splice(pos, 1, figChoice())
+    console.log(l, pos)
+}
