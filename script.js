@@ -42,3 +42,21 @@ const boardDisplay = () => {
     })
 
 };
+
+// Fonction principale du jeu
+function jeu(dataCell, cellDiv) {
+
+    if (cellDiv.textContent === "") {
+        if (turn % 2) {
+            displayTurn.textContent = 'Au tour de Joueur O';
+        } else {
+            displayTurn.textContent = 'Au tour de Joueur X';
+        }
+
+        turn++
+
+        joueur(dataCell)
+        boardDisplay()
+        testWin(figure)
+    }
+}
