@@ -119,3 +119,19 @@ function testWin(figure) {
         }
     }
 }
+
+// Reset du Board SUR CLICK BOUTON
+function resetBoard() {
+    console.log('pala')
+    l1 = ['', '', ''];
+    l2 = ['', '', ''];
+    l3 = ['', '', ''];
+    board = [l1, l2, l3]
+    displayTurn.textContent = 'Au tour de Joueur O'
+    displayWinner.textContent = ''
+    turn = 0
+    quiboucle(function (k, l, m){
+        cellDivs[k].style.backgroundColor = 'transparent'
+    })
+    boardDisplay()
+}
