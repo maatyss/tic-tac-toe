@@ -1,0 +1,44 @@
+
+.tic-tac-toe{
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.game-board{
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    box-sizing:border-box ;
+    border: 4px solid white;
+    margin: auto;
+}
+
+.cell-board{
+    font-size: 60px;
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+}
+
+.borderl{
+    border-left: 2px solid black;
+}
+.borderr{
+    border-right: 2px solid black;
+}
+.bordert{
+    border-top: 2px solid black;
+}
+.borderb{
+    border-bottom: 2px solid black;
+}
+
+button{
+    width: 100px;
+    margin-top: 25px;
+}
