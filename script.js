@@ -68,3 +68,9 @@ function joueur(dataCell) {
     board[l].splice(pos, 1, figChoice())
     console.log(l, pos)
 }
+
+// Fonction d'alternance entre chaque Figure
+function figChoice() {
+    (turn % 2) ? figure = 'O' : figure = 'X'
+    return figure
+}
