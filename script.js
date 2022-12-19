@@ -6,10 +6,24 @@ let l3 = ['', '', ''];
 // Declaration du plateau
 let board = [l1, l2, l3];
 
-// Initialisation du turn et de figure
+// Initialisation de variables
 let turn = 0
 let figure = ''
 let count = 0
+
+const winningLines = [
+    [l1[0], l1[1], l1[2]], [l1[0], l2[0], l3[0]],
+    [l1[0], l2[1], l3[2]], [l1[1], l2[1], l3[1]],
+    [l1[2], l2[2], l3[2]], [l1[2], l2[1], l3[0]],
+    [l2[0], l2[1], l2[2]], [l3[0], l3[1], l3[2]]
+];
+const indexes = [
+    [0, 1, 2], [0, 3, 6],
+    [0, 4, 8], [1, 4, 7],
+    [2, 5, 8], [2, 4, 6],
+    [3, 4, 5], [6, 7, 8]
+];
+
 
 //Declaration des reference HTML
 const displayTurn = document.querySelector('.turn')
@@ -45,7 +59,6 @@ const boardDisplay = () => {
 
 // Fonction principale du jeu
 function jeu(dataCell, cellDiv) {
-
     if (cellDiv.textContent === "") {
         if (turn % 2) {
             displayTurn.textContent = 'Au tour de Joueur O';
@@ -77,18 +90,6 @@ function figChoice() {
 
 // Fonction Test Win
 function testWin(figure) {
-    const winningLines = [
-        [l1[0], l1[1], l1[2]], [l1[0], l2[0], l3[0]],
-        [l1[0], l2[1], l3[2]], [l1[1], l2[1], l3[1]],
-        [l1[2], l2[2], l3[2]], [l1[2], l2[1], l3[0]],
-        [l2[0], l2[1], l2[2]], [l3[0], l3[1], l3[2]]
-    ];
-    const indexes = [
-        [0, 1, 2], [0, 3, 6],
-        [0, 4, 8], [1, 4, 7],
-        [2, 5, 8], [2, 4, 6],
-        [3, 4, 5], [6, 7, 8]
-    ];
     for (let line in winningLines) {
         count = 0
         if (winningLines[line][0] === figure && winningLines[line][1] === figure && winningLines[line][2] === figure) {
@@ -122,7 +123,6 @@ function testWin(figure) {
 
 // Reset du Board SUR CLICK BOUTON
 function resetBoard() {
-    console.log('pala')
     l1 = ['', '', ''];
     l2 = ['', '', ''];
     l3 = ['', '', ''];
@@ -130,7 +130,7 @@ function resetBoard() {
     displayTurn.textContent = 'Au tour de Joueur O'
     displayWinner.textContent = ''
     turn = 0
-    quiboucle(function (k, l, m){
+    quiboucle(function (k, l, m) {
         cellDivs[k].style.backgroundColor = 'transparent'
     })
     boardDisplay()
