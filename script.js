@@ -10,20 +10,7 @@ let board = [l1, l2, l3];
 let turn = 0
 let figure = ''
 let count = 0
-
-const winningLines = [
-    [l1[0], l1[1], l1[2]], [l1[0], l2[0], l3[0]],
-    [l1[0], l2[1], l3[2]], [l1[1], l2[1], l3[1]],
-    [l1[2], l2[2], l3[2]], [l1[2], l2[1], l3[0]],
-    [l2[0], l2[1], l2[2]], [l3[0], l3[1], l3[2]]
-];
-const indexes = [
-    [0, 1, 2], [0, 3, 6],
-    [0, 4, 8], [1, 4, 7],
-    [2, 5, 8], [2, 4, 6],
-    [3, 4, 5], [6, 7, 8]
-];
-
+let winround = false
 
 //Declaration des reference HTML
 const displayTurn = document.querySelector('.turn')
@@ -90,6 +77,18 @@ function figChoice() {
 
 // Fonction Test Win
 function testWin(figure) {
+    let winningLines = [
+        [l1[0], l1[1], l1[2]], [l1[0], l2[0], l3[0]],
+        [l1[0], l2[1], l3[2]], [l1[1], l2[1], l3[1]],
+        [l1[2], l2[2], l3[2]], [l1[2], l2[1], l3[0]],
+        [l2[0], l2[1], l2[2]], [l3[0], l3[1], l3[2]]
+    ];
+    let indexes = [
+        [0, 1, 2], [0, 3, 6],
+        [0, 4, 8], [1, 4, 7],
+        [2, 5, 8], [2, 4, 6],
+        [3, 4, 5], [6, 7, 8]
+    ];
     for (let line in winningLines) {
         count = 0
         if (winningLines[line][0] === figure && winningLines[line][1] === figure && winningLines[line][2] === figure) {
@@ -99,6 +98,7 @@ function testWin(figure) {
             cellDivs[indexes[line][0]].style.backgroundColor = 'lightgreen'
             cellDivs[indexes[line][1]].style.backgroundColor = 'lightgreen'
             cellDivs[indexes[line][2]].style.backgroundColor = 'lightgreen'
+            winround = true
 
             quiboucle(function (k, l, m) {
                 if (cellDivs[k].textContent === '') {
@@ -106,18 +106,19 @@ function testWin(figure) {
                     cellDivs[k].style.backgroundColor = 'lightgrey'
                 }
             })
-        } else {
-            quiboucle(function (k, l, m) {
-                if (cellDivs[k].textContent !== '/' && cellDivs[k].textContent !== '') {
-                    count++
-                }
-                if (count === 9) {
-                    console.log('match nul')
-                    displayWinner.textContent = 'Match NUL'
-                    displayTurn.textContent = 'Fin de partie'
-                }
-            })
         }
+    }
+    if (!winround) {
+        quiboucle(function (k, l, m) {
+            if (cellDivs[k].textContent !== '/' && cellDivs[k].textContent !== '') {
+                count++
+            }
+            if (count === 9) {
+                console.log('match nul')
+                displayWinner.textContent = 'Match NUL'
+                displayTurn.textContent = 'Fin de partie'
+            }
+        })
     }
 }
 
@@ -130,6 +131,7 @@ function resetBoard() {
     displayTurn.textContent = 'Au tour de Joueur O'
     displayWinner.textContent = ''
     turn = 0
+    winround = false
     quiboucle(function (k, l, m) {
         cellDivs[k].style.backgroundColor = 'transparent'
     })
